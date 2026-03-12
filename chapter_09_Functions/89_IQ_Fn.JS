@@ -19,7 +19,7 @@
 // console.log(result);
 
 
- greet("Alice"); // Calling the function in previous step (Hoisting) will work with below kind of function.
+ greet("Alice"); // Calling the function in previous step (Hoisting) will work with below kind of function
 
 function greet(name) {
     return `Hello, ${name}!`;
@@ -27,7 +27,7 @@ function greet(name) {
 
 // ❌ Expression — NOT hoisted
 
-sayHi("Bob");// this hoisting doesn't work for const or var that hols the function.
+sayHi("Bob");// this hoisting doesn't work for const or var that holds the function.
 
 const sayHi = function (name) {
     return `Hi, ${name}!`;
