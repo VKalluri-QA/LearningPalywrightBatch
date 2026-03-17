@@ -19,7 +19,7 @@
 // console.log(result);
 
 
- greet("Alice"); // Calling the function in previous step (Hoisting) will work with below kind of function
+ greet("Alice"); // Calling the function in previous step (Hoisting) will work with below kind of functiongit 
 
 function greet(name) {
     return `Hello, ${name}!`;
