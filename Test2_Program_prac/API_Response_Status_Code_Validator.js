@@ -12,7 +12,7 @@
 // - Any other → "UNKNOWN - Unhandled status code"
 
 
-let httpStatus = 400;
+let httpStatus = 401;
 switch (httpStatus) {
     case 200:
         console.log("PASS - OK: Request successful");
