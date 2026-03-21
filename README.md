@@ -93,11 +93,27 @@ A comprehensive learning resource covering JavaScript fundamentals and Playwrigh
   - Searching with `includes()`, `indexOf()`, and related checks
   - Transforming strings with trim, replace, split, join, and conversion methods
 
+## Playwright Lectures
+
+### Lecture - Playwright MCP
+- **Topics**: MCP protocol, Playwright MCP, Jira MCP, Document MCP, full STLC automation pipeline
+- **Folder**: Lecture_Playwright_MCP/
+- **Key Concepts**: Model Context Protocol architecture, AI-driven test automation, mock Jira integration, custom HTML reporting
+
+### Lecture - Playwright AI Agents
+- **Topics**: AI agents in testing, Playwright's 3 built-in agents (Planner, Generator, Healer), prompt engineering, self-healing tests
+- **Folder**: Lecture_Playwright_AI_Agents/
+- **Key Concepts**: Agentic testing, Plan → Generate → Heal workflow, agent prompt engineering, using agents with LLMs
+
+### Lecture - Playwright CLI
+- **Topics**: All Playwright CLI commands, codegen, UI mode, debug mode, trace viewer, browser management, CI/CD integration
+- **Folder**: Lecture_Playwright_CLI/
+- **Key Concepts**: Command-line mastery, test recording, debugging, trace analysis, GitHub Actions integration
+
 ## Additional Resources
 
 - **Interview Questions**: Task_Interview_Coding_Questions/ - Practical coding challenges (grade calculator, FizzBuzz, etc.)
 - **Playwright Tests**: PW_JS_Test_1/ - Test automation examples
-- **Playwright MCP Materials**: Lecture_Playwright_MCP/ - Test plans, demo assets, and STLC-related examples
 
 ## Prerequisites
 
