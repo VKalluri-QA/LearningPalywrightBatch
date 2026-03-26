@@ -20,12 +20,25 @@ This lecture covers **Playwright's built-in AI Agents** — three powerful agent
 ## Folder Structure
 
 ```
-learning/            - Core concepts: agents, workflows, prompt engineering
+learning/            - Core concepts: agents, workflows, prompt engineering (13 modules)
 agents_project/      - Complete agent pipeline project with tests
+ai_projects/         - 7 practical AI-powered testing projects
 exercises/           - Hands-on practice exercises
 notes/               - Quick reference guides
 interview_questions/ - Interview preparation Q&A (60 questions)
 ```
+
+## AI Projects (NEW)
+
+| # | Project | What It Does | Run It |
+|---|---------|-------------|--------|
+| 1 | Natural Language Test Writer | English → Playwright specs | `node ai_projects/natural_language_test_writer/generate_tests.js` |
+| 2 | Self-Healing Locators | Auto-fixes broken selectors | `npx playwright test ai_projects/self_healing_locators/tests/` |
+| 3 | AI Visual Regression | Screenshot diff + HTML report | `node ai_projects/ai_visual_regression/capture_baseline.js` |
+| 4 | Smart Test Reporter | Executive summary from results | `node ai_projects/smart_test_reporter/generate_summary.js` |
+| 5 | Accessibility Audit Agent | WCAG compliance checker | `node ai_projects/accessibility_audit_agent/audit_crawler.js` |
+| 6 | Autonomous Explorer | Finds bugs without scripts | `node ai_projects/autonomous_explorer/explorer_agent.js` |
+| 7 | AI API Testing | Contract validation + mocks | `node ai_projects/ai_api_testing/api_contract_validator.js` |
 
 ## Prerequisites
 
@@ -62,9 +75,10 @@ open tta-report/index.html
 ## Learning Path
 
 1. Start with `learning/01_What_Are_AI_Agents.md` — understand the fundamentals
-2. Read through all learning files in order (01-10)
-3. Explore `agents_project/` to see agents in action
+2. Read through all learning files in order (01-13)
+3. Explore `agents_project/` to see built-in Playwright agents in action
 4. Run the agent pipeline: `node agents_project/agents/full_agent_pipeline.js`
-5. Complete the exercises in `exercises/`
-6. Review `notes/` for quick reference
-7. Prepare for interviews with `interview_questions/`
+5. **Try the 7 AI projects** in `ai_projects/` — each has its own README
+6. Complete the exercises in `exercises/`
+7. Review `notes/` for quick reference
+8. Prepare for interviews with `interview_questions/`

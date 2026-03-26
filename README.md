@@ -104,6 +104,7 @@ A comprehensive learning resource covering JavaScript fundamentals and Playwrigh
 - **Topics**: AI agents in testing, Playwright's 3 built-in agents (Planner, Generator, Healer), prompt engineering, self-healing tests
 - **Folder**: Lecture_Playwright_AI_Agents/
 - **Key Concepts**: Agentic testing, Plan → Generate → Heal workflow, agent prompt engineering, using agents with LLMs
+- **7 AI Projects**: Natural Language Test Writer, Self-Healing Locators, AI Visual Regression, Smart Test Reporter, Accessibility Audit Agent, Autonomous Explorer, AI API Testing
 
 ### Lecture - Playwright CLI
 - **Topics**: All Playwright CLI commands, codegen, UI mode, debug mode, trace viewer, browser management, CI/CD integration
