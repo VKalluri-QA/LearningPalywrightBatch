@@ -15,3 +15,8 @@ logs/
 dist/
 coverage/
 *.local
+.playwright-cli/
+.playwright-mcp/
+playwright-report/
+test-results/
+
