@@ -9,9 +9,9 @@
 
 **A comprehensive learning resource covering JavaScript fundamentals and Playwright testing**
 
-*From zero to automation hero - 17 JavaScript chapters + 3 TypeScript chapters + 3 specialized Playwright lectures*
+*From zero to automation hero - 17 JavaScript chapters + 5 TypeScript chapters + 3 specialized Playwright lectures*
 
-[Getting Started](#-quick-start) | [JS Chapters](#-javascript-chapters-1-17) | [TS Chapters](#-typescript-chapters-18-20) | [Playwright Lectures](#-playwright-lectures) | [Learning Path](#-learning-path)
+[Getting Started](#-quick-start) | [JS Chapters](#-javascript-chapters-1-17) | [TS Chapters](#-typescript-chapters-18-22) | [Playwright Lectures](#-playwright-lectures) | [Learning Path](#-learning-path)
 
 </div>
 
@@ -22,7 +22,7 @@
 This repository is a complete curriculum designed for **SDET (Software Development Engineer in Test)** roles, covering:
 
 - **17 JavaScript Chapters** - From basics to OOP & async programming
-- **3 TypeScript Chapters** - Type safety, interfaces, and enums
+- **5 TypeScript Chapters** - Type safety, interfaces, enums, generics, and access modifiers
 - **3 Playwright Lectures** - CLI mastery, AI Agents, and MCP automation
 - **100+ Code Examples** - Real-world, runnable scripts
 - **Interview Prep** - Coding challenges and Q&A collections
@@ -59,10 +59,12 @@ graph TB
             ch17["Ch 17: Inheritance"]
         end
 
-        subgraph ts["TypeScript (Ch 18-20)"]
+        subgraph ts["TypeScript (Ch 18-22)"]
             ch18["Ch 18: TS Fundamentals"]
             ch19["Ch 19: Interfaces"]
             ch20["Ch 20: Enums"]
+            ch21["Ch 21: Generics"]
+            ch22["Ch 22: Access Modifiers"]
         end
 
         subgraph pw["Playwright Lectures"]
@@ -115,6 +117,8 @@ LearningPlaywrightBatch/
 ├── chapter_18_Typescript/              # TypeScript fundamentals & types
 ├── chapter_19_Typescript_Interface/    # TypeScript interfaces
 ├── chapter_20_Typescript_ENUM/         # TypeScript enums
+├── chapter_21_Typescript_Generic/      # TypeScript generics
+├── chapter_22_Typescript_PRIVATE_.../  # Access modifiers, abstract, readonly
 ├── Lecture_Playwright_CLI/             # Playwright CLI commands & tools
 ├── Lecture_Playwright_AI_Agents/       # AI-powered test automation
 ├── Lecture_Playwright_MCP/             # Model Context Protocol integration
@@ -205,6 +209,8 @@ flowchart LR
         Q --> R[Ch 18: TS Basics]
         R --> S[Ch 19: Interfaces]
         S --> T[Ch 20: Enums]
+        T --> U[Ch 21: Generics]
+        U --> V[Ch 22: Access Modifiers]
     end
 
     style Foundation fill:#e3f2fd
@@ -825,6 +831,130 @@ launchBrowser(Browser.Chrome);
 
 ---
 
+### Chapter 21: TypeScript Generics
+**Files:** `197_Generic.ts` to `199_GENERIC_API_RESPOSNE.ts` (3 files)
+
+```mermaid
+graph TD
+    A[Generics] --> B[Generic Functions]
+    A --> C[Generic Classes]
+    A --> D[Generic API Responses]
+
+    B --> E["getFirst<T>(arr: T[]): T"]
+    C --> F["class Storage<T>"]
+    D --> G["wrapResponse<T>(data: T)"]
+
+    style A fill:#3178c6,color:#fff
+    style B fill:#e0f7fa
+    style C fill:#fff3e0
+    style D fill:#e8f5e9
+```
+
+**Key Topics:**
+- Generic function syntax with `<T>` type parameter
+- Generic classes for type-safe data storage
+- Generic API response wrappers
+- Type inference with generics
+
+```typescript
+// Example: Generic function for test data
+function getFirstResult<T>(results: T[]): T {
+    return results[0]!;
+}
+
+let firstCode = getFirstResult<number>([200, 404, 500]);
+let firstTest = getFirstResult<string>(["Login", "Signup", "Cart"]);
+
+// Example: Generic class for test data storage
+class TestDataStorage<T> {
+    private items: T[] = [];
+
+    add(item: T): void {
+        this.items.push(item);
+    }
+
+    getFirst(): T {
+        return this.items[0]!;
+    }
+}
+```
+
+---
+
+### Chapter 22: TypeScript Access Modifiers & Advanced OOP
+**Files:** `200_PRIVATE_PUBLIC_PROTECTED.ts` to `207_Decorator.ts` (8 files)
+
+```mermaid
+graph TB
+    subgraph Access["Access Modifiers"]
+        A[public] --> B["Accessible everywhere"]
+        C[private] --> D["Only within class"]
+        E[protected] --> F["Class + subclasses"]
+    end
+
+    subgraph Advanced["Advanced Features"]
+        G[readonly] --> H["Cannot modify after init"]
+        I[abstract] --> J["Must implement in subclass"]
+        K[override] --> L["Explicitly override parent"]
+        M[as] --> N["Type assertion"]
+    end
+
+    style A fill:#c8e6c9
+    style C fill:#ffcdd2
+    style E fill:#fff9c4
+    style G fill:#e1f5fe
+    style I fill:#f3e5f5
+```
+
+**Key Topics:**
+- `public`, `private`, `protected` access modifiers
+- Page Object Model with protected members
+- `readonly` properties for configuration
+- Abstract classes and methods
+- Type assertions with `as` keyword
+- Method overriding with `override` keyword
+
+```typescript
+// Example: Access modifiers in API client
+class APIClient {
+    public baseURL: string;        // Accessible everywhere
+    private apiKey: string;        // Only in this class
+    protected timeout: number;     // Class + subclasses
+
+    constructor(url: string, key: string, timeout: number) {
+        this.baseURL = url;
+        this.apiKey = key;
+        this.timeout = timeout;
+    }
+}
+
+// Example: Readonly config
+class PlaywrightConfig {
+    readonly baseURL: string;
+    readonly timeout: number;
+
+    constructor(url: string, timeout: number) {
+        this.baseURL = url;
+        this.timeout = timeout;
+    }
+}
+
+// Example: Abstract class for tests
+abstract class BaseTest {
+    abstract setup(): void;
+    abstract execute(): void;
+    abstract teardown(): void;
+}
+
+class UITest extends BaseTest {
+    setup(): void { /* launch browser */ }
+    execute(): void { /* run test */ }
+    teardown(): void { /* close browser */ }
+}
+```
+
+---
+
 ## Playwright Lectures
 
 ### Lecture Overview
@@ -1005,11 +1135,13 @@ journey
     section OOP (Week 6)
         Classes: 4: Ch16
         Inheritance: 4: Ch17
-    section TypeScript (Week 7)
+    section TypeScript (Week 7-8)
         TS Fundamentals: 4: Ch18
         Interfaces: 5: Ch19
         Enums: 3: Ch20
-    section Playwright (Week 8-9)
+        Generics: 4: Ch21
+        Access Modifiers: 5: Ch22
+    section Playwright (Week 9-10)
         CLI Mastery: 5: CLI
         AI Agents: 5: AI
         MCP Automation: 4: MCP
@@ -1022,7 +1154,7 @@ journey
 | **Beginner** | 1-7 | Syntax, control flow, loops |
 | **Intermediate** | 8-12 | Data structures, functions |
 | **Advanced JS** | 13-17 | Async, OOP patterns |
-| **TypeScript** | 18-20 | Types, interfaces, enums |
+| **TypeScript** | 18-22 | Types, interfaces, enums, generics, access modifiers |
 | **Playwright** | CLI, AI, MCP | Test automation |
 
 ---
