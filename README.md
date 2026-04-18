@@ -9,9 +9,9 @@
 
 **A comprehensive learning resource covering JavaScript fundamentals and Playwright testing**
 
-*From zero to automation hero - 17 JavaScript chapters + 5 TypeScript chapters + 3 specialized Playwright lectures*
+*From zero to automation hero - 17 JavaScript chapters + 5 TypeScript chapters + 1 Playwright Fundamentals chapter + 3 specialized Playwright lectures*
 
-[Getting Started](#-quick-start) | [JS Chapters](#-javascript-chapters-1-17) | [TS Chapters](#-typescript-chapters-18-22) | [Playwright Lectures](#-playwright-lectures) | [Learning Path](#-learning-path)
+[Getting Started](#-quick-start) | [JS Chapters](#-javascript-chapters-1-17) | [TS Chapters](#-typescript-chapters-18-22) | [PW Fundamentals](#-chapter-23-playwright-fundamentals) | [Playwright Lectures](#-playwright-lectures) | [Learning Path](#-learning-path)
 
 </div>
 
@@ -22,7 +22,8 @@
 This repository is a complete curriculum designed for **SDET (Software Development Engineer in Test)** roles, covering:
 
 - **17 JavaScript Chapters** - From basics to OOP & async programming
-- **5 TypeScript Chapters** - Type safety, interfaces, enums, generics, and access modifiers
+- **5 TypeScript Chapters** - Type safety, interfaces, enums, generics, access modifiers & decorators
+- **1 Playwright Fundamentals Chapter** - Getting started with Playwright test automation
 - **3 Playwright Lectures** - CLI mastery, AI Agents, and MCP automation
 - **100+ Code Examples** - Real-world, runnable scripts
 - **Interview Prep** - Coding challenges and Q&A collections
@@ -64,7 +65,11 @@ graph TB
             ch19["Ch 19: Interfaces"]
             ch20["Ch 20: Enums"]
             ch21["Ch 21: Generics"]
-            ch22["Ch 22: Access Modifiers"]
+            ch22["Ch 22: Access Modifiers & Decorators"]
+        end
+
+        subgraph pwfund["Playwright Fundamentals (Ch 23)"]
+            ch23["Ch 23: PW Setup & First Tests"]
         end
 
         subgraph pw["Playwright Lectures"]
@@ -81,12 +86,14 @@ graph TB
 
     js --> adv
     adv --> ts
-    ts --> pw
+    ts --> pwfund
+    pwfund --> pw
     pw --> extra
 
     style js fill:#e1f5fe,stroke:#01579b
     style adv fill:#fff3e0,stroke:#e65100
     style ts fill:#e0f7fa,stroke:#00838f
+    style pwfund fill:#e8eaf6,stroke:#3f51b5
     style pw fill:#f3e5f5,stroke:#7b1fa2
     style extra fill:#e8f5e9,stroke:#2e7d32
 ```
@@ -118,7 +125,8 @@ LearningPlaywrightBatch/
 ├── chapter_19_Typescript_Interface/    # TypeScript interfaces
 ├── chapter_20_Typescript_ENUM/         # TypeScript enums
 ├── chapter_21_Typescript_Generic/      # TypeScript generics
-├── chapter_22_Typescript_PRIVATE_.../  # Access modifiers, abstract, readonly
+├── chapter_22_Typescript_PRIVATE_.../  # Access modifiers, abstract, readonly, decorators
+├── chapter_23_Playwright_Fundamentals/ # Playwright setup and first tests
 ├── Lecture_Playwright_CLI/             # Playwright CLI commands & tools
 ├── Lecture_Playwright_AI_Agents/       # AI-powered test automation
 ├── Lecture_Playwright_MCP/             # Model Context Protocol integration
@@ -210,7 +218,11 @@ flowchart LR
         R --> S[Ch 19: Interfaces]
         S --> T[Ch 20: Enums]
         T --> U[Ch 21: Generics]
-        U --> V[Ch 22: Access Modifiers]
+        U --> V[Ch 22: Access Modifiers & Decorators]
+    end
+
+    subgraph PlaywrightFund["Playwright Fundamentals"]
+        V --> W[Ch 23: PW Setup & First Tests]
     end
 
     style Foundation fill:#e3f2fd
@@ -219,6 +231,7 @@ flowchart LR
     style Async fill:#e8f5e9
     style OOP fill:#fce4ec
     style TypeScript fill:#e0f7fa
+    style PlaywrightFund fill:#e8eaf6
 ```
 
 ---
@@ -881,8 +894,8 @@ class TestDataStorage<T> {
 
 ---
 
-### Chapter 22: TypeScript Access Modifiers & Advanced OOP
-**Files:** `200_PRIVATE_PUBLIC_PROTECTED.ts` to `207_Decorator.ts` (8 files)
+### Chapter 22: TypeScript Access Modifiers, Decorators & Advanced OOP
+**Files:** `200_PRIVATE_PUBLIC_PROTECTED.ts` to `208_23_logs_Decortors.ts` (9 files)
 
 ```mermaid
 graph TB
@@ -897,6 +910,7 @@ graph TB
         I[abstract] --> J["Must implement in subclass"]
         K[override] --> L["Explicitly override parent"]
         M[as] --> N["Type assertion"]
+        O[decorators] --> P["Meta-programming & logging"]
     end
 
     style A fill:#c8e6c9
@@ -904,6 +918,7 @@ graph TB
     style E fill:#fff9c4
     style G fill:#e1f5fe
     style I fill:#f3e5f5
+    style O fill:#fff3e0
 ```
 
 **Key Topics:**
@@ -913,6 +928,7 @@ graph TB
 - Abstract classes and methods
 - Type assertions with `as` keyword
 - Method overriding with `override` keyword
+- Decorators for meta-programming and logging
 
 ```typescript
 // Example: Access modifiers in API client
@@ -951,6 +967,67 @@ class UITest extends BaseTest {
     execute(): void { /* run test */ }
     teardown(): void { /* close browser */ }
 }
+
+// Example: Decorator for logging
+function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
+    const original = descriptor.value;
+    descriptor.value = function (...args: any[]) {
+        console.log(`Called ${methodName} with args:`, args);
+        return original.apply(this, args);
+    };
+}
+
+class Calculator {
+    @Log
+    add(a: number, b: number) {
+        return a + b;
+    }
+}
+```
+
+---
+
+## Chapter 23: Playwright Fundamentals
+
+**Your first steps into Playwright test automation.**
+
+```
+chapter_23_Playwright_Fundamentals/
+├── tests/
+│   └── example.spec.ts    # First Playwright tests
+├── playwright.config.ts   # Playwright configuration
+├── package.json           # Dependencies
+└── node_modules/          # Installed packages
+```
+
+**Key Topics:**
+- Playwright project setup and configuration
+- Writing your first test specs
+- Page navigation with `page.goto()`
+- Assertions with `expect()` API
+- Locators using roles (`getByRole`)
+- Running tests with `npx playwright test`
+
+```typescript
+// Example: First Playwright test
+import { test, expect } from '@playwright/test';
+
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
 ```
 
 ---
@@ -1140,8 +1217,9 @@ journey
         Interfaces: 5: Ch19
         Enums: 3: Ch20
         Generics: 4: Ch21
-        Access Modifiers: 5: Ch22
+        Access Modifiers & Decorators: 5: Ch22
     section Playwright (Week 9-10)
+        PW Fundamentals: 5: Ch23
         CLI Mastery: 5: CLI
         AI Agents: 5: AI
         MCP Automation: 4: MCP
@@ -1154,8 +1232,8 @@ journey
 | **Beginner** | 1-7 | Syntax, control flow, loops |
 | **Intermediate** | 8-12 | Data structures, functions |
 | **Advanced JS** | 13-17 | Async, OOP patterns |
-| **TypeScript** | 18-22 | Types, interfaces, enums, generics, access modifiers |
-| **Playwright** | CLI, AI, MCP | Test automation |
+| **TypeScript** | 18-22 | Types, interfaces, enums, generics, access modifiers, decorators |
+| **Playwright** | 23, CLI, AI, MCP | Fundamentals and advanced test automation |
 
 ---
 
