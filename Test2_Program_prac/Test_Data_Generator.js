@@ -13,3 +13,34 @@
         // ACTIVE USR-0002 | TestUser_2 | testuser2@testingacademy.com |editor | 
         // ACTIVE USR-0003 | TestUser_3 | testuser3@testingacademy.com | viewer | 
         // INACTIVE
+
+ // ✅ const — fixed values that never change
+const DOMAIN = "testingacademy.com";
+const ROLES = ["admin", "editor", "viewer", "tester", "manager"];
+
+
+// ✅ var — global counter (exists outside loop scope)
+var totalActiveUsers = 0;
+var totalInactiveUsers = 0;
+
+// ✅ let — loop/block variables that change each iteration
+for (let i = 1; i <= ROLES.length; i++) {
+
+  let uniqueID = `USR-${String(i).padStart(4, '0')}`; // USR-0001 format
+  let name     = `TestUser_${i}`;
+  let email    = `testuser${i}@${DOMAIN}`;
+  let role     = ROLES[(i - 1) % ROLES.length];       // cycles through 5 roles
+  let status   = (i % 3 === 0) ? "INACTIVE" : "ACTIVE"; // every 3rd user
+
+  // Track counts using var (global)
+  if (status === "ACTIVE") {
+    totalActiveUsers++;
+  } else {
+    totalInactiveUsers++;
+  }
+
+  console.log(`${status} ${uniqueID} | ${name} | ${email} | ${role}  `);
+}
+
+// var variables are accessible here outside the loop
+console.log(`\nSummary → Active: ${totalActiveUsers} | Inactive: ${totalInactiveUsers}`);

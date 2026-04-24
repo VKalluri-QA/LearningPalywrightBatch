@@ -16,6 +16,9 @@ for (let i = 1; i <= n; i++) {
 
 }
 
+
+// Program to fetch non repetitive characters in a string, if nothing found print $
+
 function lastNonRepChar(s){
 
 const charCount={}
