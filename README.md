@@ -9,9 +9,9 @@
 
 **A comprehensive learning resource covering JavaScript fundamentals and Playwright testing**
 
-*From zero to automation hero - 17 chapters of JavaScript + 3 specialized Playwright lectures*
+*From zero to automation hero - 17 JavaScript chapters + 5 TypeScript chapters + 1 Playwright Fundamentals chapter + 3 specialized Playwright lectures*
 
-[Getting Started](#-quick-start) | [Chapters](#-javascript-chapters-1-17) | [Playwright Lectures](#-playwright-lectures) | [Learning Path](#-learning-path)
+[Getting Started](#-quick-start) | [JS Chapters](#-javascript-chapters-1-17) | [TS Chapters](#-typescript-chapters-18-22) | [PW Fundamentals](#-chapter-23-playwright-fundamentals) | [Playwright Lectures](#-playwright-lectures) | [Learning Path](#-learning-path)
 
 </div>
 
@@ -22,6 +22,8 @@
 This repository is a complete curriculum designed for **SDET (Software Development Engineer in Test)** roles, covering:
 
 - **17 JavaScript Chapters** - From basics to OOP & async programming
+- **5 TypeScript Chapters** - Type safety, interfaces, enums, generics, access modifiers & decorators
+- **1 Playwright Fundamentals Chapter** - Getting started with Playwright test automation
 - **3 Playwright Lectures** - CLI mastery, AI Agents, and MCP automation
 - **100+ Code Examples** - Real-world, runnable scripts
 - **Interview Prep** - Coding challenges and Q&A collections
@@ -58,6 +60,18 @@ graph TB
             ch17["Ch 17: Inheritance"]
         end
 
+        subgraph ts["TypeScript (Ch 18-22)"]
+            ch18["Ch 18: TS Fundamentals"]
+            ch19["Ch 19: Interfaces"]
+            ch20["Ch 20: Enums"]
+            ch21["Ch 21: Generics"]
+            ch22["Ch 22: Access Modifiers & Decorators"]
+        end
+
+        subgraph pwfund["Playwright Fundamentals (Ch 23)"]
+            ch23["Ch 23: PW Setup & First Tests"]
+        end
+
         subgraph pw["Playwright Lectures"]
             cli["CLI Mastery"]
             ai["AI Agents"]
@@ -71,11 +85,15 @@ graph TB
     end
 
     js --> adv
-    adv --> pw
+    adv --> ts
+    ts --> pwfund
+    pwfund --> pw
     pw --> extra
 
     style js fill:#e1f5fe,stroke:#01579b
     style adv fill:#fff3e0,stroke:#e65100
+    style ts fill:#e0f7fa,stroke:#00838f
+    style pwfund fill:#e8eaf6,stroke:#3f51b5
     style pw fill:#f3e5f5,stroke:#7b1fa2
     style extra fill:#e8f5e9,stroke:#2e7d32
 ```
@@ -103,6 +121,12 @@ LearningPlaywrightBatch/
 ├── chapter_15_Async_Await/             # Modern async programming
 ├── chapter_16_OOps/                    # Classes, encapsulation, ES6 modules
 ├── chapter_17_OOPs_Inheritance/        # Inheritance patterns
+├── chapter_18_Typescript/              # TypeScript fundamentals & types
+├── chapter_19_Typescript_Interface/    # TypeScript interfaces
+├── chapter_20_Typescript_ENUM/         # TypeScript enums
+├── chapter_21_Typescript_Generic/      # TypeScript generics
+├── chapter_22_Typescript_PRIVATE_.../  # Access modifiers, abstract, readonly, decorators
+├── chapter_23_Playwright_Fundamentals/ # Playwright setup and first tests
 ├── Lecture_Playwright_CLI/             # Playwright CLI commands & tools
 ├── Lecture_Playwright_AI_Agents/       # AI-powered test automation
 ├── Lecture_Playwright_MCP/             # Model Context Protocol integration
@@ -189,11 +213,25 @@ flowchart LR
         P --> Q[Ch 17: Inheritance]
     end
 
+    subgraph TypeScript["TypeScript"]
+        Q --> R[Ch 18: TS Basics]
+        R --> S[Ch 19: Interfaces]
+        S --> T[Ch 20: Enums]
+        T --> U[Ch 21: Generics]
+        U --> V[Ch 22: Access Modifiers & Decorators]
+    end
+
+    subgraph PlaywrightFund["Playwright Fundamentals"]
+        V --> W[Ch 23: PW Setup & First Tests]
+    end
+
     style Foundation fill:#e3f2fd
     style Control fill:#fff8e1
     style DataStructures fill:#f3e5f5
     style Async fill:#e8f5e9
     style OOP fill:#fce4ec
+    style TypeScript fill:#e0f7fa
+    style PlaywrightFund fill:#e8eaf6
 ```
 
 ---
@@ -667,6 +705,333 @@ chapter_17_OOPs_Inheritance/
 
 ---
 
+## TypeScript Chapters (18-20)
+
+### Chapter 18: TypeScript Fundamentals
+**Files:** `175_TS.js` to `183_Filter_Array.ts` (9 files)
+
+```mermaid
+graph TD
+    A[JavaScript] --> B[TypeScript]
+    B --> C{Type System}
+    C --> D[Primitive Types<br/>string, number, boolean]
+    C --> E[Special Types<br/>any, unknown, void, never]
+    C --> F[Type Annotations<br/>variables, functions]
+
+    style B fill:#3178c6,color:#fff
+    style D fill:#e0f7fa
+    style E fill:#fff3e0
+    style F fill:#e8f5e9
+```
+
+**Key Topics:**
+- TypeScript setup and compilation
+- Basic types (`string`, `number`, `boolean`)
+- Special types (`any`, `unknown`, `void`, `never`)
+- Type annotations for variables and functions
+- Type inference
+- Array typing
+
+```typescript
+// Example: Type annotations
+let testName: string = "Login Test";
+let testCount: number = 42;
+let isEnabled: boolean = true;
+
+function runTest(name: string): void {
+    console.log("Running: " + name);
+}
+```
+
+---
+
+### Chapter 19: TypeScript Interfaces
+**Files:** `184_TS_Interface.ts` to `192_Index_TS_Sing.ts` (9 files)
+
+```mermaid
+graph TB
+    subgraph Interface["Interface Definition"]
+        A[Properties] --> B["id: number"]
+        A --> C["name: string"]
+        A --> D["optional?: string"]
+    end
+
+    subgraph Usage["Interface Usage"]
+        E[Object Typing]
+        F[Function Parameters]
+        G[Class Implementation]
+    end
+
+    subgraph RealWorld["QA Use Cases"]
+        H[TestCase Interface]
+        I[BugReport Interface]
+        J[PageObject Interface]
+        K[TestConfig Interface]
+    end
+
+    Interface --> Usage --> RealWorld
+```
+
+**Key Topics:**
+- Interface basics and syntax
+- Optional and required properties
+- Method signatures in interfaces
+- Interfaces for test configuration
+- Real-world QA interfaces (BugReport, TestCase, PageObject)
+- Class implementing interfaces
+- Index signatures
+
+```typescript
+// Example: BugReport interface for QA
+interface BugReport {
+    id: number;
+    title: string;
+    severity: string;
+    stepsToReproduce: string[];
+}
+
+function logBug(bug: BugReport): void {
+    console.log(`BUG-${bug.id} [${bug.severity}] ${bug.title}`);
+}
+```
+
+---
+
+### Chapter 20: TypeScript Enums
+**Files:** `193_ENUM.ts` to `196_ENUM_API_example.ts` (4 files)
+
+```mermaid
+graph LR
+    subgraph Enum["Enum Types"]
+        A[String Enum]
+        B[Numeric Enum]
+    end
+
+    subgraph Examples["QA Examples"]
+        C[TestStatus<br/>Pass, Fail, Skip]
+        D[Browser<br/>Chrome, Firefox, Safari]
+        E[HTTPStatus<br/>200, 404, 500]
+    end
+
+    Enum --> Examples
+
+    style A fill:#e8f5e9
+    style B fill:#fff3e0
+```
+
+**Key Topics:**
+- String enums vs numeric enums
+- Enum in function parameters
+- Switch statements with enums
+- Real-world examples (TestStatus, Browser selection)
+- API response status enums
+
+```typescript
+// Example: Browser selection enum
+enum Browser {
+    Chrome = "chrome",
+    Firefox = "firefox",
+    Safari = "safari",
+    Edge = "edge"
+}
+
+function launchBrowser(browser: Browser): void {
+    console.log("Launching: " + browser);
+}
+
+launchBrowser(Browser.Chrome);
+```
+
+---
+
+### Chapter 21: TypeScript Generics
+**Files:** `197_Generic.ts` to `199_GENERIC_API_RESPOSNE.ts` (3 files)
+
+```mermaid
+graph TD
+    A[Generics] --> B[Generic Functions]
+    A --> C[Generic Classes]
+    A --> D[Generic API Responses]
+
+    B --> E["getFirst<T>(arr: T[]): T"]
+    C --> F["class Storage<T>"]
+    D --> G["wrapResponse<T>(data: T)"]
+
+    style A fill:#3178c6,color:#fff
+    style B fill:#e0f7fa
+    style C fill:#fff3e0
+    style D fill:#e8f5e9
+```
+
+**Key Topics:**
+- Generic function syntax with `<T>` type parameter
+- Generic classes for type-safe data storage
+- Generic API response wrappers
+- Type inference with generics
+
+```typescript
+// Example: Generic function for test data
+function getFirstResult<T>(results: T[]): T {
+    return results[0]!;
+}
+
+let firstCode = getFirstResult<number>([200, 404, 500]);
+let firstTest = getFirstResult<string>(["Login", "Signup", "Cart"]);
+
+// Example: Generic class for test data storage
+class TestDataStorage<T> {
+    private items: T[] = [];
+
+    add(item: T): void {
+        this.items.push(item);
+    }
+
+    getFirst(): T {
+        return this.items[0]!;
+    }
+}
+```
+
+---
+
+### Chapter 22: TypeScript Access Modifiers, Decorators & Advanced OOP
+**Files:** `200_PRIVATE_PUBLIC_PROTECTED.ts` to `208_23_logs_Decortors.ts` (9 files)
+
+```mermaid
+graph TB
+    subgraph Access["Access Modifiers"]
+        A[public] --> B["Accessible everywhere"]
+        C[private] --> D["Only within class"]
+        E[protected] --> F["Class + subclasses"]
+    end
+
+    subgraph Advanced["Advanced Features"]
+        G[readonly] --> H["Cannot modify after init"]
+        I[abstract] --> J["Must implement in subclass"]
+        K[override] --> L["Explicitly override parent"]
+        M[as] --> N["Type assertion"]
+        O[decorators] --> P["Meta-programming & logging"]
+    end
+
+    style A fill:#c8e6c9
+    style C fill:#ffcdd2
+    style E fill:#fff9c4
+    style G fill:#e1f5fe
+    style I fill:#f3e5f5
+    style O fill:#fff3e0
+```
+
+**Key Topics:**
+- `public`, `private`, `protected` access modifiers
+- Page Object Model with protected members
+- `readonly` properties for configuration
+- Abstract classes and methods
+- Type assertions with `as` keyword
+- Method overriding with `override` keyword
+- Decorators for meta-programming and logging
+
+```typescript
+// Example: Access modifiers in API client
+class APIClient {
+    public baseURL: string;        // Accessible everywhere
+    private apiKey: string;        // Only in this class
+    protected timeout: number;     // Class + subclasses
+
+    constructor(url: string, key: string, timeout: number) {
+        this.baseURL = url;
+        this.apiKey = key;
+        this.timeout = timeout;
+    }
+}
+
+// Example: Readonly config
+class PlaywrightConfig {
+    readonly baseURL: string;
+    readonly timeout: number;
+
+    constructor(url: string, timeout: number) {
+        this.baseURL = url;
+        this.timeout = timeout;
+    }
+}
+
+// Example: Abstract class for tests
+abstract class BaseTest {
+    abstract setup(): void;
+    abstract execute(): void;
+    abstract teardown(): void;
+}
+
+class UITest extends BaseTest {
+    setup(): void { /* launch browser */ }
+    execute(): void { /* run test */ }
+    teardown(): void { /* close browser */ }
+}
+
+// Example: Decorator for logging
+function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
+    const original = descriptor.value;
+    descriptor.value = function (...args: any[]) {
+        console.log(`Called ${methodName} with args:`, args);
+        return original.apply(this, args);
+    };
+}
+
+class Calculator {
+    @Log
+    add(a: number, b: number) {
+        return a + b;
+    }
+}
+```
+
+---
+
+## Chapter 23: Playwright Fundamentals
+
+**Your first steps into Playwright test automation.**
+
+```
+chapter_23_Playwright_Fundamentals/
+├── tests/
+│   └── example.spec.ts    # First Playwright tests
+├── playwright.config.ts   # Playwright configuration
+├── package.json           # Dependencies
+└── node_modules/          # Installed packages
+```
+
+**Key Topics:**
+- Playwright project setup and configuration
+- Writing your first test specs
+- Page navigation with `page.goto()`
+- Assertions with `expect()` API
+- Locators using roles (`getByRole`)
+- Running tests with `npx playwright test`
+
+```typescript
+// Example: First Playwright test
+import { test, expect } from '@playwright/test';
+
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+```
+
+---
+
 ## Playwright Lectures
 
 ### Lecture Overview
@@ -847,7 +1212,14 @@ journey
     section OOP (Week 6)
         Classes: 4: Ch16
         Inheritance: 4: Ch17
-    section Playwright (Week 7-8)
+    section TypeScript (Week 7-8)
+        TS Fundamentals: 4: Ch18
+        Interfaces: 5: Ch19
+        Enums: 3: Ch20
+        Generics: 4: Ch21
+        Access Modifiers & Decorators: 5: Ch22
+    section Playwright (Week 9-10)
+        PW Fundamentals: 5: Ch23
         CLI Mastery: 5: CLI
         AI Agents: 5: AI
         MCP Automation: 4: MCP
@@ -859,8 +1231,9 @@ journey
 |-------|----------|-------|
 | **Beginner** | 1-7 | Syntax, control flow, loops |
 | **Intermediate** | 8-12 | Data structures, functions |
-| **Advanced** | 13-17 | Async, OOP patterns |
-| **Playwright** | CLI, AI, MCP | Test automation |
+| **Advanced JS** | 13-17 | Async, OOP patterns |
+| **TypeScript** | 18-22 | Types, interfaces, enums, generics, access modifiers, decorators |
+| **Playwright** | 23, CLI, AI, MCP | Fundamentals and advanced test automation |
 
 ---
 
